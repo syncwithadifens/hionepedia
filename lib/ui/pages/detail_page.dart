@@ -24,7 +24,7 @@ class DetailPage extends StatelessWidget {
               height: 300,
               child: ModelViewer(
                 src:
-                    'http://192.168.10.102:8000/storage/3d-assets/63c68f5e6f113.glb',
+                    'https://hionepedia.000webhostapp.com/model/1674218229_cebbe33cf3dd824cd46b.glb',
                 alt: "A 3D model of an astronaut",
                 ar: true,
                 autoRotate: true,
@@ -43,7 +43,7 @@ class DetailPage extends StatelessWidget {
                   IconButton(
                       onPressed: () {
                         audioPlayer.setUrl(
-                            'http://192.168.10.102:8000/storage/animal-sound/63c68f5eb1c63.mp3');
+                            'https://hionepedia.000webhostapp.com/sound/1674218229_4d06bdbd331687ad3dec.mp3');
                         audioPlayer.play();
                       },
                       icon: Image.asset('assets/icons/sound.png'))
