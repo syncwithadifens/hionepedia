@@ -72,7 +72,10 @@ class _HomePageState extends State<HomePage> {
                           onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const DetailPage(),
+                                builder: (context) => DetailPage(
+                                  animalData:
+                                      animalProvider.animalData!.animal![index],
+                                ),
                               )),
                           child: Container(
                               decoration: BoxDecoration(
