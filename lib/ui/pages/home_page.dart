@@ -41,11 +41,9 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w500),
                         ),
-                        Container(
-                          height: 80,
-                          width: 80,
-                          decoration: const BoxDecoration(
-                              color: Colors.amber, shape: BoxShape.circle),
+                        Image.asset(
+                          'assets/avatar/default_avatar.png',
+                          width: 100,
                         )
                       ],
                     ),
@@ -55,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                     margin: const EdgeInsets.fromLTRB(20, 10, 20, 20),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(18),
-                        color: Colors.deepPurple),
+                        color: Colors.grey),
                   ),
                   Container(
                     padding: const EdgeInsets.only(

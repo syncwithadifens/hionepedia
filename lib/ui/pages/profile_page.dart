@@ -8,12 +8,9 @@ class ProfilePage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          margin: const EdgeInsets.only(bottom: 20),
-          height: 100,
-          width: 100,
-          decoration: const BoxDecoration(
-              color: Colors.deepPurple, shape: BoxShape.circle),
+        Image.asset(
+          'assets/avatar/default_avatar.png',
+          width: 200,
         ),
         const Text(
           'Afiv Dicky Efendy',
