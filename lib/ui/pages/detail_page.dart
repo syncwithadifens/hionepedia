@@ -19,13 +19,21 @@ class DetailPage extends StatelessWidget {
               height: 400,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12), color: Colors.grey),
-              child: ModelViewer(
-                src: '${ApiRepository.apiUrl}/model/${animalData.model}',
-                alt: "A 3D model of an astronaut",
-                ar: true,
-                autoRotate: true,
-                cameraControls: true,
-              ),
+              child: animalData.offline == 'no'
+                  ? ModelViewer(
+                      src: '${ApiRepository.apiUrl}/model/${animalData.model}',
+                      alt: "A 3D model of an astronaut",
+                      ar: true,
+                      autoRotate: true,
+                      cameraControls: true,
+                    )
+                  : ModelViewer(
+                      src: 'assets/model/${animalData.model}',
+                      alt: "A 3D model of an astronaut",
+                      ar: true,
+                      autoRotate: true,
+                      cameraControls: true,
+                    ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),

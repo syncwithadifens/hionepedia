@@ -41,6 +41,7 @@ class Animal {
   String? thumbnail;
   String? sound;
   String? model;
+  String? offline;
   DateTime? createdAt;
 
   Animal({
@@ -51,6 +52,7 @@ class Animal {
     this.thumbnail,
     this.sound,
     this.model,
+    this.offline,
     this.createdAt,
   });
 
@@ -62,6 +64,7 @@ class Animal {
         thumbnail: json["thumbnail"],
         sound: json["sound"],
         model: json["model"],
+        offline: json["offline"],
         createdAt: json["created_at"] == null
             ? null
             : DateTime.parse(json["created_at"]),
@@ -75,6 +78,7 @@ class Animal {
         "thumbnail": thumbnail,
         "sound": sound,
         "model": model,
+        "offline": offline,
         "created_at": createdAt?.toIso8601String(),
       };
 }
