@@ -58,11 +58,18 @@ class _FavoritePageState extends State<FavoritePage> {
                               ),
                             )),
                         child: Container(
+                            padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: Colors.amber),
-                            child: Image.network(
-                                '${ApiRepository.apiUrl}/img/${favoriteProvider.favoriteData!.favorited![index].thumbnail}')),
+                              borderRadius: BorderRadius.circular(12),
+                              color: Colors.black,
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.network(
+                                '${ApiRepository.apiUrl}/img/${favoriteProvider.favoriteData!.favorited![index].thumbnail}',
+                                fit: BoxFit.cover,
+                              ),
+                            )),
                       );
                     },
                   )

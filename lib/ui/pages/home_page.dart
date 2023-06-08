@@ -78,9 +78,12 @@ class _HomePageState extends State<HomePage> {
                           child: Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12),
-                                  color: Colors.amber),
-                              child: Image.network(
-                                  '${ApiRepository.apiUrl}/img/${animalProvider.animalData!.animal![index].thumbnail}')),
+                                  color: Colors.teal),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.network(
+                                    '${ApiRepository.apiUrl}/img/${animalProvider.animalData!.animal![index].thumbnail}'),
+                              )),
                         );
                       },
                     ),

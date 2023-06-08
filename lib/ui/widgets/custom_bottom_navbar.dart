@@ -18,7 +18,7 @@ class CustomBottomNavbar extends StatelessWidget {
       notchBottomBarController: _controller,
       color: Colors.white,
       showLabel: true,
-      notchColor: Colors.black87,
+      notchColor: Colors.teal,
       removeMargins: false,
       bottomBarWidth: 500,
       durationInMilliSeconds: 300,

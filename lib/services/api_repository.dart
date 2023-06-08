@@ -21,7 +21,7 @@ abstract class ApiRepository {
   static getFavoriteData() async {
     try {
       final response = await dio.get('$apiUrl/api/favorite');
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         return FavoriteModel.fromJson(response.data);
       }
     } catch (e) {
