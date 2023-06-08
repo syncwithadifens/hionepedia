@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hionepedia/models/animal_model.dart';
 import 'package:hionepedia/services/api_repository.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({super.key, required this.animalData});
 
-  final Animal animalData;
+  final dynamic animalData;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

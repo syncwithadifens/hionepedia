@@ -1,39 +1,40 @@
 // To parse this JSON data, do
 //
-//     final animalModel = animalModelFromJson(jsonString);
+//     final favoriteModel = favoriteModelFromJson(jsonString);
 
 import 'dart:convert';
 
-AnimalModel animalModelFromJson(String str) =>
-    AnimalModel.fromJson(json.decode(str));
+FavoriteModel favoriteModelFromJson(String str) =>
+    FavoriteModel.fromJson(json.decode(str));
 
-String animalModelToJson(AnimalModel data) => json.encode(data.toJson());
+String favoriteModelToJson(FavoriteModel data) => json.encode(data.toJson());
 
-class AnimalModel {
+class FavoriteModel {
   String? status;
-  List<Animal>? animal;
+  List<Favorited>? favorited;
 
-  AnimalModel({
+  FavoriteModel({
     this.status,
-    this.animal,
+    this.favorited,
   });
 
-  factory AnimalModel.fromJson(Map<String, dynamic> json) => AnimalModel(
+  factory FavoriteModel.fromJson(Map<String, dynamic> json) => FavoriteModel(
         status: json["status"],
-        animal: json["animal"] == null
+        favorited: json["favorited"] == null
             ? []
-            : List<Animal>.from(json["animal"]!.map((x) => Animal.fromJson(x))),
+            : List<Favorited>.from(
+                json["favorited"]!.map((x) => Favorited.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
-        "animal": animal == null
+        "favorited": favorited == null
             ? []
-            : List<dynamic>.from(animal!.map((x) => x.toJson())),
+            : List<dynamic>.from(favorited!.map((x) => x.toJson())),
       };
 }
 
-class Animal {
+class Favorited {
   String? animalId;
   String? name;
   String? slug;
@@ -43,8 +44,10 @@ class Animal {
   String? model;
   String? offline;
   DateTime? createdAt;
+  String? favoriteId;
+  String? userId;
 
-  Animal({
+  Favorited({
     this.animalId,
     this.name,
     this.slug,
@@ -54,9 +57,11 @@ class Animal {
     this.model,
     this.offline,
     this.createdAt,
+    this.favoriteId,
+    this.userId,
   });
 
-  factory Animal.fromJson(Map<String, dynamic> json) => Animal(
+  factory Favorited.fromJson(Map<String, dynamic> json) => Favorited(
         animalId: json["animal_id"],
         name: json["name"],
         slug: json["slug"],
@@ -68,6 +73,8 @@ class Animal {
         createdAt: json["created_at"] == null
             ? null
             : DateTime.parse(json["created_at"]),
+        favoriteId: json["favorite_id"],
+        userId: json["user_id"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -80,5 +87,7 @@ class Animal {
         "model": model,
         "offline": offline,
         "created_at": createdAt?.toIso8601String(),
+        "favorite_id": favoriteId,
+        "user_id": userId,
       };
 }

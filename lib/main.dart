@@ -2,6 +2,7 @@ import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_not
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hionepedia/providers/animal_provider.dart';
+import 'package:hionepedia/providers/favorite_provider.dart';
 import 'package:hionepedia/ui/pages/favorite_page.dart';
 import 'package:hionepedia/ui/pages/home_page.dart';
 import 'package:hionepedia/ui/pages/profile_page.dart';
@@ -21,6 +22,9 @@ class MainApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => AnimalProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => FavoriteProvider(),
         )
       ],
       child: const MaterialApp(
