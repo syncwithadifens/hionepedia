@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hionepedia/providers/animal_provider.dart';
 import 'package:hionepedia/services/api_repository.dart';
-import 'package:hionepedia/ui/pages/detail_page.dart';
+import 'package:hionepedia/ui/pages/content/detail_page.dart';
+import 'package:hionepedia/ui/widgets/error.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -90,10 +91,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               )
-            : const Center(
-                child: Text(
-                'Oopsie.. \nServer sedang bermasalah',
-                style: TextStyle(fontSize: 18),
-              ));
+            : const IsError();
   }
 }

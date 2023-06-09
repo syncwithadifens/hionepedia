@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hionepedia/providers/favorite_provider.dart';
 import 'package:hionepedia/services/api_repository.dart';
-import 'package:hionepedia/ui/pages/detail_page.dart';
+import 'package:hionepedia/ui/pages/content/detail_page.dart';
+import 'package:hionepedia/ui/widgets/error.dart';
 import 'package:provider/provider.dart';
 
 class FavoritePage extends StatefulWidget {
@@ -75,11 +76,6 @@ class _FavoritePageState extends State<FavoritePage> {
                   )
                 ],
               )
-            : const Center(
-                child: Text(
-                  'Oopsie.. \nServer sedang bermasalah',
-                  style: TextStyle(fontSize: 18),
-                ),
-              );
+            : const IsError();
   }
 }

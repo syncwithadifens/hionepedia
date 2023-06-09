@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hionepedia/theme/styles.dart';
-import 'package:hionepedia/ui/pages/register_page.dart';
+import 'package:hionepedia/ui/pages/authentication/register_page.dart';
+import 'package:hionepedia/ui/pages/content/mypage.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -86,24 +87,31 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              height: 60,
-              width: double.infinity,
-              margin: const EdgeInsets.fromLTRB(32, 40, 32, 10),
-              decoration: BoxDecoration(
-                  color: Colors.deepPurple,
-                  borderRadius: BorderRadius.circular(18)),
-              child: const Center(
-                  child: Text(
-                'Go',
-                style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              )),
+            GestureDetector(
+              onTap: () => Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MyPage(),
+                  )),
+              child: Container(
+                height: 60,
+                width: double.infinity,
+                margin: const EdgeInsets.fromLTRB(32, 40, 32, 10),
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple,
+                    borderRadius: BorderRadius.circular(18)),
+                child: const Center(
+                    child: Text(
+                  'Go',
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                )),
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 20),
+              padding: const EdgeInsets.only(top: 10, bottom: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

@@ -94,7 +94,7 @@ class RegisterPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: TextField(
-                keyboardType: TextInputType.name,
+                keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(
