@@ -5,6 +5,7 @@ import 'package:hionepedia/providers/animal_provider.dart';
 import 'package:hionepedia/providers/favorite_provider.dart';
 import 'package:hionepedia/ui/pages/favorite_page.dart';
 import 'package:hionepedia/ui/pages/home_page.dart';
+import 'package:hionepedia/ui/pages/login_page.dart';
 import 'package:hionepedia/ui/pages/profile_page.dart';
 import 'package:hionepedia/ui/widgets/custom_bottom_navbar.dart';
 import 'package:provider/provider.dart';
@@ -29,7 +30,7 @@ class MainApp extends StatelessWidget {
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Page(),
+        home: LoginPage(),
       ),
     );
   }
