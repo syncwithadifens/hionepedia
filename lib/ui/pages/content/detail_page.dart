@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hionepedia/services/api_repository.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 
 class DetailPage extends StatelessWidget {
@@ -8,6 +9,7 @@ class DetailPage extends StatelessWidget {
   final dynamic animalData;
   @override
   Widget build(BuildContext context) {
+    final audioPlayer = AudioPlayer();
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -45,7 +47,12 @@ class DetailPage extends StatelessWidget {
                         fontSize: 24, fontWeight: FontWeight.w500),
                   ),
                   IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.headphones))
+                      onPressed: () {
+                        audioPlayer.setUrl(
+                            '${ApiRepository.apiUrl}/sound/${animalData.sound}');
+                        audioPlayer.play();
+                      },
+                      icon: const Icon(Icons.headphones))
                 ],
               ),
             ),
