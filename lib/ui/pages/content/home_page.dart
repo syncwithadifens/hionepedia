@@ -4,6 +4,7 @@ import 'package:hionepedia/providers/animal_provider.dart';
 import 'package:hionepedia/services/api_repository.dart';
 import 'package:hionepedia/ui/pages/content/detail_page.dart';
 import 'package:hionepedia/ui/widgets/error.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,8 +23,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final animalProvider = Provider.of<AnimalProvider>(context);
+    final myBox = Hive.box('userBox');
+    final username = myBox.get('userActive');
 
+    final animalProvider = Provider.of<AnimalProvider>(context);
     return animalProvider.isLoading
         ? const Center(
             child: CircularProgressIndicator(),
@@ -37,9 +40,9 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          'Hai, yourname',
-                          style: TextStyle(
+                        Text(
+                          username[1],
+                          style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w500),
                         ),
                         Image.asset(

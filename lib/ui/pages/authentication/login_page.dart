@@ -1,13 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:hionepedia/providers/user_provider.dart';
 import 'package:hionepedia/theme/styles.dart';
 import 'package:hionepedia/ui/pages/authentication/register_page.dart';
 import 'package:hionepedia/ui/pages/content/mypage.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    void showError(String message) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: Colors.red,
+        content: Text(
+          message,
+          textAlign: TextAlign.center,
+        ),
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8), topRight: Radius.circular(8))),
+      ));
+    }
+
     return Scaffold(
         body: SafeArea(
       child: SingleChildScrollView(
@@ -40,6 +56,7 @@ class LoginPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: TextField(
+                controller: userProvider.usernameCtrl,
                 keyboardType: TextInputType.name,
                 textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
@@ -65,6 +82,7 @@ class LoginPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: TextField(
+                controller: userProvider.pinCtrl,
                 keyboardType: TextInputType.visiblePassword,
                 textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
@@ -88,28 +106,46 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () => Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const MyPage(),
-                  )),
-              child: Container(
-                height: 60,
-                width: double.infinity,
-                margin: const EdgeInsets.fromLTRB(32, 40, 32, 10),
-                decoration: BoxDecoration(
-                    color: Colors.deepPurple,
-                    borderRadius: BorderRadius.circular(18)),
-                child: const Center(
-                    child: Text(
-                  'Go',
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                )),
-              ),
-            ),
+                onTap: () {
+                  if (userProvider.usernameCtrl.text.isNotEmpty &&
+                      userProvider.pinCtrl.text.isNotEmpty) {
+                    userProvider.getUserData().then((value) => {
+                          userProvider.status == 'isLoggedIn'
+                              ? Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const MyPage(),
+                                  ))
+                              : Future.delayed(const Duration(seconds: 4),
+                                  () => showError(userProvider.errorMessage))
+                        });
+                  } else {
+                    showError('Username / Pin is required');
+                  }
+                },
+                child: userProvider.isLoading
+                    ? const Center(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 20),
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
+                    : Container(
+                        height: 60,
+                        width: double.infinity,
+                        margin: const EdgeInsets.fromLTRB(32, 40, 32, 10),
+                        decoration: BoxDecoration(
+                            color: Colors.deepPurple,
+                            borderRadius: BorderRadius.circular(18)),
+                        child: const Center(
+                            child: Text(
+                          'Go',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        )),
+                      )),
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 20),
               child: Row(
