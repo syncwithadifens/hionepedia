@@ -19,7 +19,6 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final myBox = Hive.box('userBox');
-    print(myBox.values);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(

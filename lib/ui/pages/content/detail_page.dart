@@ -23,14 +23,14 @@ class DetailPage extends StatelessWidget {
               child: animalData.offline == 'no'
                   ? ModelViewer(
                       src: '${ApiRepository.apiUrl}/model/${animalData.model}',
-                      alt: "A 3D model of an astronaut",
+                      alt: "A 3D model of an animal",
                       ar: true,
                       autoRotate: true,
                       cameraControls: true,
                     )
                   : ModelViewer(
                       src: 'assets/model/${animalData.model}',
-                      alt: "A 3D model of an astronaut",
+                      alt: "A 3D model of an animal",
                       ar: true,
                       autoRotate: true,
                       cameraControls: true,
@@ -39,20 +39,22 @@ class DetailPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     '${animalData.name}',
                     style: const TextStyle(
                         fontSize: 24, fontWeight: FontWeight.w500),
                   ),
+                  const Spacer(),
                   IconButton(
                       onPressed: () {
                         audioPlayer.setUrl(
                             '${ApiRepository.apiUrl}/sound/${animalData.sound}');
                         audioPlayer.play();
                       },
-                      icon: const Icon(Icons.headphones))
+                      icon: const Icon(Icons.headphones)),
+                  //TODO: membuat fitur menambahkan ke favorite
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.favorite))
                 ],
               ),
             ),
