@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final myBox = Hive.box('userBox');
-    final username = myBox.get('userActive');
+    final userActive = myBox.get('userActive');
 
     final animalProvider = Provider.of<AnimalProvider>(context);
     return animalProvider.isLoading
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          username[1],
+                          userActive[1],
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w500),
                         ),
