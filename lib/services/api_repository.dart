@@ -5,7 +5,7 @@ import 'package:hionepedia/models/favorite_model.dart';
 import 'package:hionepedia/models/user_model.dart';
 
 abstract class ApiRepository {
-  static const apiUrl = 'http://192.168.43.132:8080';
+  static const apiUrl = 'http://192.168.20.30:8080';
   static final dio = Dio();
 
   static getAllData() async {
