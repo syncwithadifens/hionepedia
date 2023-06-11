@@ -19,6 +19,28 @@ abstract class ApiRepository {
     }
   }
 
+  static addToFavorite(String animalId) async {
+    try {
+      final response = await dio.post('$apiUrl/api/animal/$animalId/favorite');
+      if (response.statusCode == 201) {
+        return AddFav.fromJson(response.data);
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  static removeFromFavorite(String favId) async {
+    try {
+      final response = await dio.delete('$apiUrl/api/favorite/$favId');
+      if (response.statusCode == 200) {
+        return true;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
   static getFavoriteData() async {
     try {
       final response = await dio.get('$apiUrl/api/favorite');

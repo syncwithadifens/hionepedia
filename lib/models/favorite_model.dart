@@ -91,3 +91,55 @@ class Favorited {
         "user_id": userId,
       };
 }
+
+// To parse this JSON data, do
+//
+//     final addFav = addFavFromJson(jsonString);
+
+AddFav addFavFromJson(String str) => AddFav.fromJson(json.decode(str));
+
+String addFavToJson(AddFav data) => json.encode(data.toJson());
+
+class AddFav {
+  String? message;
+  int? favoriteId;
+  Data? data;
+
+  AddFav({
+    this.message,
+    this.favoriteId,
+    this.data,
+  });
+
+  factory AddFav.fromJson(Map<String, dynamic> json) => AddFav(
+        message: json["message"],
+        favoriteId: json["favorite_id"],
+        data: json["data"] == null ? null : Data.fromJson(json["data"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "message": message,
+        "favorite_id": favoriteId,
+        "data": data?.toJson(),
+      };
+}
+
+class Data {
+  int? userId;
+  String? animalId;
+
+  Data({
+    this.userId,
+    this.animalId,
+  });
+
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+        userId: json["user_id"],
+        animalId: json["animal_id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "user_id": userId,
+        "animal_id": animalId,
+      };
+}
