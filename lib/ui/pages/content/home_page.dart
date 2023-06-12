@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hionepedia/providers/animal_provider.dart';
 import 'package:hionepedia/services/api_repository.dart';
+import 'package:hionepedia/theme/styles.dart';
 import 'package:hionepedia/ui/pages/content/detail_page.dart';
 import 'package:hionepedia/ui/widgets/error.dart';
 import 'package:hive/hive.dart';
@@ -80,13 +81,17 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               )),
                           child: Container(
+                              padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  color: Colors.teal),
+                                  borderRadius: BorderRadius.circular(8),
+                                  color:
+                                      randomColor[index % randomColor.length]),
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(8),
                                 child: Image.network(
-                                    '${ApiRepository.apiUrl}/img/${animalProvider.animalData!.animal![index].thumbnail}'),
+                                  '${ApiRepository.apiUrl}/img/${animalProvider.animalData!.animal![index].thumbnail}',
+                                  fit: BoxFit.cover,
+                                ),
                               )),
                         );
                       },

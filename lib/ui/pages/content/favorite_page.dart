@@ -14,10 +14,12 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
+  String userActive = '';
+
   @override
   void initState() {
     final myBox = Hive.box('userBox');
-    String userActive = myBox.get('userActive')[0];
+    userActive = myBox.get('userActive')[0];
     Provider.of<FavoriteProvider>(context, listen: false)
         .getFavoriteData(int.parse(userActive));
     super.initState();
@@ -31,53 +33,74 @@ class _FavoritePageState extends State<FavoritePage> {
             child: CircularProgressIndicator(),
           )
         : favoriteProvider.isSuccess
-            ? ListView(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
-                    child: Text(
-                      'Favorite',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+            ? RefreshIndicator(
+                onRefresh: () {
+                  return favoriteProvider
+                      .getFavoriteData(int.parse(userActive));
+                },
+                child: ListView(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+                      child: Text(
+                        'Favorite',
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.w500),
+                      ),
                     ),
-                  ),
-                  GridView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: favoriteProvider.favoriteData!.favorited!.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 10),
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DetailPage(
-                                animalData: favoriteProvider
-                                    .favoriteData!.favorited![index],
+                    GridView.builder(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount:
+                          favoriteProvider.favoriteData!.favorited!.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 10),
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailPage(
+                                  animalData: favoriteProvider
+                                      .favoriteData!.favorited![index],
+                                ),
+                              )),
+                          child: Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: Colors.black,
                               ),
-                            )),
-                        child: Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              color: Colors.black,
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: Image.network(
-                                '${ApiRepository.apiUrl}/img/${favoriteProvider.favoriteData!.favorited![index].thumbnail}',
-                                fit: BoxFit.cover,
-                              ),
-                            )),
-                      );
-                    },
-                  )
-                ],
+                              child: Stack(
+                                fit: StackFit.expand,
+                                children: [
+                                  Image.network(
+                                    '${ApiRepository.apiUrl}/img/${favoriteProvider.favoriteData!.favorited![index].thumbnail}',
+                                    fit: BoxFit.cover,
+                                  ),
+                                  Align(
+                                      alignment: Alignment.topRight,
+                                      child: Container(
+                                        padding: const EdgeInsets.all(5),
+                                        decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle),
+                                        child: const Icon(
+                                          Icons.favorite,
+                                          color: Colors.red,
+                                        ),
+                                      ))
+                                ],
+                              )),
+                        );
+                      },
+                    )
+                  ],
+                ),
               )
             : const IsError();
   }
