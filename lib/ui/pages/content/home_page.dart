@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:hionepedia/extensions/custom_extension.dart';
 import 'package:hionepedia/providers/animal_provider.dart';
 import 'package:hionepedia/services/api_repository.dart';
 import 'package:hionepedia/theme/styles.dart';
@@ -42,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          userActive[1],
+                          'Hai, ${userActive[1].toString().toTitleCase()}',
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w500),
                         ),

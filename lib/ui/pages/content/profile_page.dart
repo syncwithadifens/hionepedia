@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hionepedia/extensions/custom_extension.dart';
 import 'package:hionepedia/providers/user_provider.dart';
 import 'package:hionepedia/ui/pages/authentication/login_page.dart';
 import 'package:hive/hive.dart';
@@ -20,7 +21,7 @@ class ProfilePage extends StatelessWidget {
           width: 200,
         ),
         Text(
-          userActive[1],
+          userActive[1].toString().toTitleCase(),
           style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
         ),
         Padding(
@@ -31,7 +32,7 @@ class ProfilePage extends StatelessWidget {
           ),
         ),
         Text(
-          userActive[3],
+          userActive[3].toString().toTitleCase(),
           style: const TextStyle(fontSize: 18),
         ),
         Padding(
