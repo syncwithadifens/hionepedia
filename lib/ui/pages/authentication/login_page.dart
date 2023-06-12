@@ -32,9 +32,8 @@ class LoginPage extends StatelessWidget {
           children: [
             Container(
                 margin: const EdgeInsets.only(
-                    left: 12, right: 12, top: 12, bottom: 30),
-                height: 430,
-                width: double.infinity,
+                    left: 12, right: 12, top: 12, bottom: 20),
+                padding: const EdgeInsets.all(0),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     color: const Color(0xffF6C3BF)),
@@ -47,7 +46,7 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             const Padding(
-              padding: EdgeInsets.fromLTRB(32, 30, 32, 10),
+              padding: EdgeInsets.fromLTRB(32, 10, 32, 10),
               child: Text(
                 'Username',
                 style: TextStyle(fontSize: 18),
@@ -56,9 +55,10 @@ class LoginPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: TextField(
+                autofocus: true,
                 controller: userProvider.usernameCtrl,
                 keyboardType: TextInputType.name,
-                textInputAction: TextInputAction.done,
+                textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(
                     Icons.account_box,
@@ -83,18 +83,23 @@ class LoginPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: TextField(
                 controller: userProvider.pinCtrl,
-                keyboardType: TextInputType.visiblePassword,
+                keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.done,
+                obscureText: userProvider.isHide,
+                maxLength: 6,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(
                     Icons.lock,
                     color: Colors.grey,
                   ),
                   suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
+                    onPressed: () {
+                      userProvider.toggleIsHide();
+                    },
+                    icon: Icon(
                       Icons.visibility,
-                      color: Colors.deepPurple,
+                      color:
+                          userProvider.isHide ? Colors.grey : Colors.deepPurple,
                     ),
                   ),
                   filled: true,
@@ -109,14 +114,14 @@ class LoginPage extends StatelessWidget {
                 onTap: () {
                   if (userProvider.usernameCtrl.text.isNotEmpty &&
                       userProvider.pinCtrl.text.isNotEmpty) {
-                    userProvider.getUserData().then((value) => {
+                    userProvider.login().then((value) => {
                           userProvider.status == 'isLoggedIn'
                               ? Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => const MyPage(),
                                   ))
-                              : Future.delayed(const Duration(seconds: 4),
+                              : Future.delayed(const Duration(seconds: 3),
                                   () => showError(userProvider.errorMessage))
                         });
                   } else {

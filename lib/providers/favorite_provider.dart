@@ -8,9 +8,9 @@ class FavoriteProvider extends ChangeNotifier {
   bool isSuccess = false;
   Map favoriteItem = {};
 
-  Future<void> getFavoriteData() async {
+  Future<void> getFavoriteData(int userId) async {
     isLoading = true;
-    favoriteData = await ApiRepository.getFavoriteData();
+    favoriteData = await ApiRepository.getFavoriteData(userId);
     if (favoriteData != null) {
       isLoading = false;
       isSuccess = true;
@@ -26,7 +26,7 @@ class FavoriteProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> toggleFavorite(String animalId) async {
+  Future<void> toggleFavorite(int userId, String animalId) async {
     final isExist = favoriteItem.containsKey(animalId);
     if (isExist) {
       String favoriteId = favoriteItem[animalId];
@@ -38,7 +38,7 @@ class FavoriteProvider extends ChangeNotifier {
         debugPrint('Gagal hapus favorite');
       }
     } else {
-      AddFav response = await ApiRepository.addToFavorite(animalId);
+      AddFav response = await ApiRepository.addToFavorite(userId, animalId);
       if (response.message == 'Added to favorite') {
         favoriteItem[animalId] = response.favoriteId;
         notifyListeners();

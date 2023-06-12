@@ -1,11 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:hionepedia/providers/user_provider.dart';
 import 'package:hionepedia/theme/styles.dart';
+import 'package:hionepedia/ui/pages/authentication/login_page.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    void showError(String message) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: Colors.red,
+        content: Text(
+          message,
+          textAlign: TextAlign.center,
+        ),
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8), topRight: Radius.circular(8))),
+      ));
+    }
+
     return Scaffold(
         body: SafeArea(
       child: SingleChildScrollView(
@@ -37,8 +54,10 @@ class RegisterPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: TextField(
+                controller: userProvider.usernameCtrl,
+                autofocus: true,
                 keyboardType: TextInputType.name,
-                textInputAction: TextInputAction.done,
+                textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(
                     Icons.account_box,
@@ -62,18 +81,24 @@ class RegisterPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: TextField(
-                keyboardType: TextInputType.visiblePassword,
-                textInputAction: TextInputAction.done,
+                controller: userProvider.pinCtrl,
+                keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.next,
+                obscureText: userProvider.isHide,
+                maxLength: 6,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(
                     Icons.lock,
                     color: Colors.grey,
                   ),
                   suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
+                    onPressed: () {
+                      userProvider.toggleIsHide();
+                    },
+                    icon: Icon(
                       Icons.visibility,
-                      color: Colors.deepPurple,
+                      color:
+                          userProvider.isHide ? Colors.grey : Colors.deepPurple,
                     ),
                   ),
                   filled: true,
@@ -94,8 +119,9 @@ class RegisterPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: TextField(
+                controller: userProvider.ageCtrl,
                 keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.done,
+                textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(
                     Icons.calendar_today,
@@ -110,7 +136,7 @@ class RegisterPage extends StatelessWidget {
               ),
             ),
             const Padding(
-              padding: EdgeInsets.fromLTRB(32, 10, 32, 10),
+              padding: EdgeInsets.fromLTRB(32, 30, 32, 10),
               child: Text(
                 'Hobi',
                 style: TextStyle(fontSize: 18),
@@ -119,6 +145,7 @@ class RegisterPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: TextField(
+                controller: userProvider.hobbyCtrl,
                 keyboardType: TextInputType.name,
                 textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
@@ -135,7 +162,25 @@ class RegisterPage extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () => Navigator.of(context).pop(),
+              onTap: () {
+                if (userProvider.usernameCtrl.text.isNotEmpty &&
+                    userProvider.pinCtrl.text.isNotEmpty &&
+                    userProvider.ageCtrl.text.isNotEmpty &&
+                    userProvider.hobbyCtrl.text.isNotEmpty) {
+                  userProvider.register().then((value) => {
+                        userProvider.status == 'isRegistered'
+                            ? Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const LoginPage(),
+                                ))
+                            : Future.delayed(const Duration(seconds: 3),
+                                () => showError(userProvider.errorMessage))
+                      });
+                } else {
+                  showError('All fields is required');
+                }
+              },
               child: Container(
                 height: 60,
                 width: double.infinity,

@@ -3,6 +3,7 @@ import 'package:hionepedia/providers/favorite_provider.dart';
 import 'package:hionepedia/services/api_repository.dart';
 import 'package:hionepedia/ui/pages/content/detail_page.dart';
 import 'package:hionepedia/ui/widgets/error.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 class FavoritePage extends StatefulWidget {
@@ -15,14 +16,16 @@ class FavoritePage extends StatefulWidget {
 class _FavoritePageState extends State<FavoritePage> {
   @override
   void initState() {
-    Provider.of<FavoriteProvider>(context, listen: false).getFavoriteData();
+    final myBox = Hive.box('userBox');
+    String userActive = myBox.get('userActive')[0];
+    Provider.of<FavoriteProvider>(context, listen: false)
+        .getFavoriteData(int.parse(userActive));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final favoriteProvider = Provider.of<FavoriteProvider>(context);
-
     return favoriteProvider.isLoading
         ? const Center(
             child: CircularProgressIndicator(),
