@@ -1,30 +1,30 @@
-import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:hionepedia/models/animal_model.dart';
 import 'package:hionepedia/models/favorite_model.dart';
 import 'package:hionepedia/models/user_model.dart';
 
 abstract class ApiRepository {
-  static const apiUrl = 'http://aturhionepedia.000webhostapp.com';
-  static final dio = Dio();
+  static const apiUrl = 'http://hionepedia-backend.test';
 
   static getAllData() async {
     try {
-      final response = await dio.get('$apiUrl/api/animal');
+      final response = await http.get(Uri.parse('$apiUrl/api/animal'));
       if (response.statusCode == 200) {
-        return AnimalModel.fromJson(response.data);
+        return animalModelFromJson(response.body);
       }
     } catch (e) {
       debugPrint(e.toString());
     }
   }
 
-  static addToFavorite(int userId, String animalId) async {
+  static addToFavorite(String userId, String animalId) async {
     try {
-      final response = await dio.post('$apiUrl/api/animal/$animalId/favorite',
-          data: {'user_id': userId});
+      final response = await http.post(
+          Uri.parse('$apiUrl/api/animal/$animalId/favorite'),
+          body: {'user_id': userId});
       if (response.statusCode == 201) {
-        return AddFav.fromJson(response.data);
+        return addFavFromJson(response.body);
       }
     } catch (e) {
       debugPrint(e.toString());
@@ -33,7 +33,8 @@ abstract class ApiRepository {
 
   static removeFromFavorite(String favId) async {
     try {
-      final response = await dio.delete('$apiUrl/api/favorite/$favId');
+      final response =
+          await http.delete(Uri.parse('$apiUrl/api/favorite/$favId'));
       if (response.statusCode == 200) {
         return true;
       }
@@ -42,11 +43,12 @@ abstract class ApiRepository {
     }
   }
 
-  static getFavoriteData(int userId) async {
+  static getFavoriteData(String userId) async {
     try {
-      final response = await dio.get('$apiUrl/api/favorite?user_id=$userId');
+      final response =
+          await http.get(Uri.parse('$apiUrl/api/favorite?user_id=$userId'));
       if (response.statusCode == 201) {
-        return FavoriteModel.fromJson(response.data);
+        return favoriteModelFromJson(response.body);
       }
     } catch (e) {
       debugPrint(e.toString());
@@ -55,29 +57,32 @@ abstract class ApiRepository {
 
   static login(String username, String pin) async {
     try {
-      final response = await dio
-          .post('$apiUrl/api/login', data: {'username': username, 'pin': pin});
+      final response = await http.post(Uri.parse('$apiUrl/api/login'),
+          body: {'username': username, 'pin': pin});
       if (response.statusCode == 200) {
-        return UserModel.fromJson(response.data);
+        return userModelFromJson(response.body);
+      } else {
+        return userModelFromJson(response.body);
       }
-    } on DioException catch (e) {
-      return UserModel.fromJson(e.response!.data);
+    } catch (e) {
+      debugPrint(e.toString());
     }
   }
 
   static register(String username, String pin, String age, String hobby) async {
     try {
-      final response = await dio.post('$apiUrl/api/register', data: {
-        'username': username,
-        'pin': pin,
-        'age': int.parse(age),
-        'hobby': hobby
-      });
+      final response = await http.post(Uri.parse('$apiUrl/api/register'),
+          body: {
+            'username': username,
+            'pin': pin,
+            'age': int.parse(age),
+            'hobby': hobby
+          });
       if (response.statusCode == 201) {
         return 'Account created successfully';
       }
-    } on DioException catch (e) {
-      return UserModel.fromJson(e.response!.data);
+    } catch (e) {
+      debugPrint(e.toString());
     }
   }
 }

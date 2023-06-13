@@ -23,7 +23,7 @@ class _DetailPageState extends State<DetailPage> {
     final myBox = Hive.box('userBox');
     userActive = myBox.get('userActive')[0];
     Provider.of<FavoriteProvider>(context, listen: false)
-        .getFavoriteData(int.parse(userActive));
+        .getFavoriteData(userActive);
     super.initState();
   }
 
@@ -79,8 +79,8 @@ class _DetailPageState extends State<DetailPage> {
                         icon: const Icon(Icons.headphones)),
                     IconButton(
                         onPressed: () async {
-                          favProvider.toggleFavorite(int.parse(userActive),
-                              widget.animalData.animalId);
+                          favProvider.toggleFavorite(
+                              userActive, widget.animalData.animalId);
                         },
                         icon: Icon(
                           Icons.favorite,

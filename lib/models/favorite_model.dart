@@ -125,7 +125,7 @@ class AddFav {
 }
 
 class Data {
-  int? userId;
+  String? userId;
   String? animalId;
 
   Data({

@@ -21,7 +21,7 @@ class _FavoritePageState extends State<FavoritePage> {
     final myBox = Hive.box('userBox');
     userActive = myBox.get('userActive')[0];
     Provider.of<FavoriteProvider>(context, listen: false)
-        .getFavoriteData(int.parse(userActive));
+        .getFavoriteData(userActive);
     super.initState();
   }
 
@@ -35,8 +35,7 @@ class _FavoritePageState extends State<FavoritePage> {
         : favoriteProvider.isSuccess
             ? RefreshIndicator(
                 onRefresh: () {
-                  return favoriteProvider
-                      .getFavoriteData(int.parse(userActive));
+                  return favoriteProvider.getFavoriteData(userActive);
                 },
                 child: ListView(
                   children: [
