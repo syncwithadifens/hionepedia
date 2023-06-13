@@ -24,3 +24,12 @@ jobs:
         with:
           artifacts: "build/app/outputs/flutter-apk/*"
           token: ${{ secrets.GH_TOKEN }}
+        # flutter web deploy
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        env:
+          FIREBASE_CLI_EXPERIMENTS: webframeworks
+        with:
+          repoToken: "${{ secrets.GH_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_HIONEPEDIA }}"
+          channelId: live
+          projectId: hionepedia
