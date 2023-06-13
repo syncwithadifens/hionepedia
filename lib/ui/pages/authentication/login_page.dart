@@ -25,156 +25,162 @@ class LoginPage extends StatelessWidget {
     }
 
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         body: SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-                margin: const EdgeInsets.only(
-                    left: 12, right: 12, top: 12, bottom: 20),
-                padding: const EdgeInsets.all(0),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: const Color(0xffF6C3BF)),
-                child:
-                    Center(child: Image.asset('assets/illustration/vr.png'))),
-            const Center(
-              child: Text(
-                'Login',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(32, 10, 32, 10),
-              child: Text(
-                'Username',
-                style: TextStyle(fontSize: 18),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: TextField(
-                autofocus: true,
-                controller: userProvider.usernameCtrl,
-                keyboardType: TextInputType.name,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(
-                    Icons.account_box,
-                    color: Colors.grey,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                    margin: const EdgeInsets.only(
+                        left: 12, right: 12, top: 12, bottom: 20),
+                    padding: const EdgeInsets.all(0),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: const Color(0xffF6C3BF)),
+                    child: Center(
+                        child: Image.asset('assets/illustration/vr.png'))),
+                const Center(
+                  child: Text(
+                    'Login',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
                   ),
-                  filled: true,
-                  fillColor: lightGrey,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(18),
-                      borderSide: BorderSide.none),
                 ),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(32, 30, 32, 10),
-              child: Text(
-                'Pin',
-                style: TextStyle(fontSize: 18),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: TextField(
-                controller: userProvider.pinCtrl,
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.done,
-                obscureText: userProvider.isHide,
-                maxLength: 6,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(
-                    Icons.lock,
-                    color: Colors.grey,
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(32, 10, 32, 10),
+                  child: Text(
+                    'Username',
+                    style: TextStyle(fontSize: 18),
                   ),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      userProvider.toggleIsHide();
-                    },
-                    icon: Icon(
-                      Icons.visibility,
-                      color:
-                          userProvider.isHide ? Colors.grey : Colors.deepPurple,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: TextField(
+                    autofocus: true,
+                    controller: userProvider.usernameCtrl,
+                    keyboardType: TextInputType.name,
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(
+                        Icons.account_box,
+                        color: Colors.grey,
+                      ),
+                      filled: true,
+                      fillColor: lightGrey,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(18),
+                          borderSide: BorderSide.none),
                     ),
                   ),
-                  filled: true,
-                  fillColor: lightGrey,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(18),
-                      borderSide: BorderSide.none),
                 ),
-              ),
-            ),
-            GestureDetector(
-                onTap: () {
-                  if (userProvider.usernameCtrl.text.isNotEmpty &&
-                      userProvider.pinCtrl.text.isNotEmpty) {
-                    userProvider.login().then((value) => {
-                          userProvider.status == 'isLoggedIn'
-                              ? Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const MyPage(),
-                                  ))
-                              : Future.delayed(const Duration(seconds: 3),
-                                  () => showError(userProvider.errorMessage))
-                        });
-                  } else {
-                    showError('Username / Pin is required');
-                  }
-                },
-                child: userProvider.isLoading
-                    ? const Center(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 20),
-                          child: CircularProgressIndicator(),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(32, 30, 32, 10),
+                  child: Text(
+                    'Pin',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: TextField(
+                    controller: userProvider.pinCtrl,
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.done,
+                    obscureText: userProvider.isHide,
+                    maxLength: 6,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(
+                        Icons.lock,
+                        color: Colors.grey,
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          userProvider.toggleIsHide();
+                        },
+                        icon: Icon(
+                          Icons.visibility,
+                          color: userProvider.isHide
+                              ? Colors.grey
+                              : Colors.deepPurple,
                         ),
-                      )
-                    : Container(
-                        height: 60,
-                        width: double.infinity,
-                        margin: const EdgeInsets.fromLTRB(32, 40, 32, 10),
-                        decoration: BoxDecoration(
-                            color: Colors.deepPurple,
-                            borderRadius: BorderRadius.circular(18)),
-                        child: const Center(
-                            child: Text(
-                          'Go',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        )),
-                      )),
-            Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Belum punya akun? ',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  GestureDetector(
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const RegisterPage(),
-                    )),
-                    child: const Text(
-                      'buat sekarang juga',
-                      style: TextStyle(fontSize: 14, color: Colors.deepPurple),
+                      ),
+                      filled: true,
+                      fillColor: lightGrey,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(18),
+                          borderSide: BorderSide.none),
                     ),
                   ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    ));
+                ),
+                GestureDetector(
+                    onTap: () {
+                      if (userProvider.usernameCtrl.text.isNotEmpty &&
+                          userProvider.pinCtrl.text.isNotEmpty) {
+                        userProvider.login().then((value) => {
+                              userProvider.status == 'isLoggedIn'
+                                  ? Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const MyPage(),
+                                      ))
+                                  : Future.delayed(
+                                      const Duration(seconds: 3),
+                                      () =>
+                                          showError(userProvider.errorMessage))
+                            });
+                      } else {
+                        showError('Username / Pin is required');
+                      }
+                    },
+                    child: userProvider.isLoading
+                        ? const Center(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 20),
+                              child: CircularProgressIndicator(),
+                            ),
+                          )
+                        : Container(
+                            height: 60,
+                            width: double.infinity,
+                            margin: const EdgeInsets.fromLTRB(32, 40, 32, 10),
+                            decoration: BoxDecoration(
+                                color: Colors.deepPurple,
+                                borderRadius: BorderRadius.circular(18)),
+                            child: const Center(
+                                child: Text(
+                              'Go',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                          )),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10, bottom: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Belum punya akun? ',
+                        style: TextStyle(fontSize: 14),
+                      ),
+                      GestureDetector(
+                        onTap: () =>
+                            Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const RegisterPage(),
+                        )),
+                        child: const Text(
+                          'buat sekarang juga',
+                          style:
+                              TextStyle(fontSize: 14, color: Colors.deepPurple),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ));
   }
 }
