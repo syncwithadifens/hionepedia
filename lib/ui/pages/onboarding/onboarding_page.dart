@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hionepedia/theme/styles.dart';
 import 'package:hionepedia/ui/pages/authentication/login_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -43,7 +44,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               ],
             ),
             Container(
-                alignment: const Alignment(0, 0.80),
+                alignment: const Alignment(0, 0.85),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -53,7 +54,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             MaterialPageRoute(
                               builder: (context) => const LoginPage(),
                             )),
-                        child: const Text('Skip')),
+                        child: Text(
+                          'Lewati',
+                          style: textStyle.copyWith(color: Colors.grey),
+                        )),
                     SmoothPageIndicator(controller: _pageCtrl, count: 3),
                     _onLastPage
                         ? GestureDetector(
@@ -62,14 +66,22 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                 MaterialPageRoute(
                                   builder: (context) => const LoginPage(),
                                 )),
-                            child: const Text('Done'))
+                            child: Text(
+                              'Selesai',
+                              style: textStyle.copyWith(
+                                  fontWeight: FontWeight.w600),
+                            ))
                         : GestureDetector(
                             onTap: () {
                               _pageCtrl.nextPage(
                                   duration: const Duration(milliseconds: 500),
                                   curve: Curves.easeIn);
                             },
-                            child: const Text('Next'))
+                            child: Text(
+                              'Lanjut',
+                              style: textStyle.copyWith(
+                                  fontWeight: FontWeight.w600),
+                            ))
                   ],
                 )),
           ],
@@ -84,13 +96,29 @@ class IntroPageOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(18),
-        child: Image.asset(
-          'assets/illustration/confuse.png',
-          width: 300,
-        ),
+    return Padding(
+      padding: const EdgeInsets.only(left: 32, right: 32, top: 50),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(18),
+            child: Image.asset(
+              'assets/illustration/confuse.png',
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20, bottom: 10),
+            child: Text(
+              'Cara baru belajar',
+              style: titleStyle.copyWith(fontWeight: FontWeight.w600),
+            ),
+          ),
+          Text(
+            'Aplikasi pembelajaran yang akan mengubah cara Anda belajar. Kenali beragam hewan langkai di ujung jari Anda.',
+            style: textStyle.copyWith(fontSize: 14),
+            textAlign: TextAlign.justify,
+          )
+        ],
       ),
     );
   }
@@ -101,13 +129,30 @@ class IntroPageTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ClipRRect(
-          borderRadius: BorderRadius.circular(18),
-          child: Image.asset(
-            'assets/illustration/favorite.png',
-            width: 300,
-          )),
+    return Padding(
+      padding: const EdgeInsets.only(left: 32, right: 32, top: 100),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(18),
+            child: Image.asset(
+              'assets/illustration/favorite.png',
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20, bottom: 10),
+            child: Text(
+              'Fitur Favorite',
+              style: titleStyle.copyWith(fontWeight: FontWeight.w600),
+            ),
+          ),
+          Text(
+            'Buat koleksi hewan pribadi dengan fitur Favorite. Tandai hewan yang disuka dan lihat kembali saat Anda membutuhkannya.',
+            style: textStyle.copyWith(fontSize: 14),
+            textAlign: TextAlign.justify,
+          )
+        ],
+      ),
     );
   }
 }
@@ -117,13 +162,30 @@ class IntroPageThree extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ClipRRect(
-          borderRadius: BorderRadius.circular(18),
-          child: Image.asset(
-            'assets/illustration/tryit.png',
-            width: 300,
-          )),
+    return Padding(
+      padding: const EdgeInsets.only(left: 32, right: 32, top: 100),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(18),
+            child: Image.asset(
+              'assets/illustration/tryit.png',
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20, bottom: 10),
+            child: Text(
+              'Mulai belajar',
+              style: titleStyle.copyWith(fontWeight: FontWeight.w600),
+            ),
+          ),
+          Text(
+            'Ayo mulai petualangan belajar! Temukan fitur-fitur canggih aplikasi  dan nikmati pengalaman belajar yang tak terlupakan.',
+            style: textStyle.copyWith(fontSize: 14),
+            textAlign: TextAlign.justify,
+          )
+        ],
+      ),
     );
   }
 }
