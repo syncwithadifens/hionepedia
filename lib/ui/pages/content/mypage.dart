@@ -1,5 +1,6 @@
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hionepedia/ui/pages/content/favorite_page.dart';
 import 'package:hionepedia/ui/pages/content/home_page.dart';
 import 'package:hionepedia/ui/pages/content/profile_page.dart';
@@ -30,15 +31,20 @@ class _MyPageState extends State<MyPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: PageView(
-          controller: _pageController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: List.generate(
-              bottomBarPages.length, (index) => bottomBarPages[index]),
-        ),
-        extendBody: true,
-        bottomNavigationBar: CustomBottomNavbar(
-            controller: _controller, pageController: _pageController));
+    return AnnotatedRegion(
+      value: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark),
+      child: Scaffold(
+          body: PageView(
+            controller: _pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: List.generate(
+                bottomBarPages.length, (index) => bottomBarPages[index]),
+          ),
+          extendBody: true,
+          bottomNavigationBar: CustomBottomNavbar(
+              controller: _controller, pageController: _pageController)),
+    );
   }
 }

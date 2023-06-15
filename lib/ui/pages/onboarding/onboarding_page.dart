@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hionepedia/theme/styles.dart';
-import 'package:hionepedia/ui/pages/authentication/login_page.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:hionepedia/ui/widgets/onboarding_indicator.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -28,6 +27,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.dark),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
             PageView(
@@ -43,47 +43,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 IntroPageThree(),
               ],
             ),
-            Container(
-                alignment: const Alignment(0, 0.85),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    GestureDetector(
-                        onTap: () => Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const LoginPage(),
-                            )),
-                        child: Text(
-                          'Lewati',
-                          style: textStyle.copyWith(color: Colors.grey),
-                        )),
-                    SmoothPageIndicator(controller: _pageCtrl, count: 3),
-                    _onLastPage
-                        ? GestureDetector(
-                            onTap: () => Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const LoginPage(),
-                                )),
-                            child: Text(
-                              'Selesai',
-                              style: textStyle.copyWith(
-                                  fontWeight: FontWeight.w600),
-                            ))
-                        : GestureDetector(
-                            onTap: () {
-                              _pageCtrl.nextPage(
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.easeIn);
-                            },
-                            child: Text(
-                              'Lanjut',
-                              style: textStyle.copyWith(
-                                  fontWeight: FontWeight.w600),
-                            ))
-                  ],
-                )),
+            OnboardingIndicator(pageCtrl: _pageCtrl, onLastPage: _onLastPage),
           ],
         ),
       ),
@@ -104,6 +64,7 @@ class IntroPageOne extends StatelessWidget {
             borderRadius: BorderRadius.circular(18),
             child: Image.asset(
               'assets/illustration/confuse.png',
+              height: MediaQuery.of(context).size.height * 0.5,
             ),
           ),
           Padding(
@@ -137,6 +98,7 @@ class IntroPageTwo extends StatelessWidget {
             borderRadius: BorderRadius.circular(18),
             child: Image.asset(
               'assets/illustration/favorite.png',
+              height: MediaQuery.of(context).size.height * 0.4,
             ),
           ),
           Padding(
@@ -170,6 +132,7 @@ class IntroPageThree extends StatelessWidget {
             borderRadius: BorderRadius.circular(18),
             child: Image.asset(
               'assets/illustration/tryit.png',
+              height: MediaQuery.of(context).size.height * 0.4,
             ),
           ),
           Padding(

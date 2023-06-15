@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 20),
+                        horizontal: 30, vertical: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -49,21 +49,51 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Image.asset(
                           'assets/avatar/default_avatar.png',
-                          width: 100,
+                          height: 80,
                         )
                       ],
                     ),
                   ),
                   Container(
                     height: 180,
-                    margin: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
-                        color: Colors.grey),
+                    margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                            height: 150,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(18),
+                                gradient: LinearGradient(
+                                    colors: [primaryColor, lightGrey])),
+                          ),
+                        ),
+                        Positioned(
+                          top: 40,
+                          left: 20,
+                          right: 30,
+                          child: Text(
+                            'Yuk mulai mengenal hewan langka',
+                            style: titleStyle.copyWith(
+                                color: lightGrey, fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: Image.asset(
+                              'assets/illustration/fury.png',
+                              height: 150,
+                            ))
+                      ],
+                    ),
                   ),
                   Container(
                     padding: const EdgeInsets.only(
-                        left: 20, right: 20, top: 20, bottom: 20),
+                        left: 20, right: 20, top: 0, bottom: 20),
                     child: MasonryGridView.count(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -82,7 +112,6 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               )),
                           child: Container(
-                              padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   color:

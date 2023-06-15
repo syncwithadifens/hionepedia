@@ -16,9 +16,12 @@ class ProfilePage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(
-          'assets/avatar/default_avatar.png',
-          width: 200,
+        Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: Image.asset(
+            'assets/avatar/default_avatar.png',
+            width: 170,
+          ),
         ),
         Text(
           userActive[1].toString().toTitleCase(),

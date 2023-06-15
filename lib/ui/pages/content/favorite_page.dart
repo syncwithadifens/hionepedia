@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hionepedia/providers/favorite_provider.dart';
 import 'package:hionepedia/services/api_repository.dart';
+import 'package:hionepedia/theme/styles.dart';
 import 'package:hionepedia/ui/pages/content/detail_page.dart';
 import 'package:hionepedia/ui/widgets/error.dart';
 import 'package:hive/hive.dart';
@@ -71,15 +72,18 @@ class _FavoritePageState extends State<FavoritePage> {
                           child: Container(
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(10),
+                                color: blackColor,
                               ),
                               child: Stack(
                                 fit: StackFit.expand,
                                 children: [
-                                  Image.network(
-                                    '${ApiRepository.apiUrl}/img/${favoriteProvider.favoriteData!.favorited![index].thumbnail}',
-                                    fit: BoxFit.cover,
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(14),
+                                    child: Image.network(
+                                      '${ApiRepository.apiUrl}/img/${favoriteProvider.favoriteData!.favorited![index].thumbnail}',
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                   Align(
                                       alignment: Alignment.topRight,
@@ -88,9 +92,9 @@ class _FavoritePageState extends State<FavoritePage> {
                                         decoration: const BoxDecoration(
                                             color: Colors.white,
                                             shape: BoxShape.circle),
-                                        child: const Icon(
-                                          Icons.favorite,
-                                          color: Colors.red,
+                                        child: Image.asset(
+                                          'assets/icon/favorite.png',
+                                          width: 30,
                                         ),
                                       ))
                                 ],

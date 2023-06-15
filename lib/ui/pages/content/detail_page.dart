@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hionepedia/providers/favorite_provider.dart';
 import 'package:hionepedia/services/api_repository.dart';
+import 'package:hionepedia/theme/styles.dart';
 import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
@@ -39,10 +40,23 @@ class _DetailPageState extends State<DetailPage> {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Container(
+                margin: const EdgeInsets.only(top: 15),
                 height: 400,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    color: Colors.grey),
+                    color: Colors.grey[50],
+                    boxShadow: [
+                      BoxShadow(
+                        color: blackColor,
+                        offset: const Offset(5, 5),
+                        blurRadius: 20,
+                      ),
+                      const BoxShadow(
+                        color: Colors.white,
+                        offset: Offset(-5, -5),
+                        blurRadius: 20,
+                      )
+                    ]),
                 child: widget.animalData.offline == 'no'
                     ? ModelViewer(
                         src:
@@ -61,7 +75,7 @@ class _DetailPageState extends State<DetailPage> {
                       ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Row(
                   children: [
                     Text(
@@ -76,19 +90,19 @@ class _DetailPageState extends State<DetailPage> {
                               '${ApiRepository.apiUrl}/sound/${widget.animalData.sound}');
                           audioPlayer.play();
                         },
-                        icon: const Icon(Icons.headphones)),
+                        icon: Image.asset('assets/icon/sound.png')),
                     IconButton(
                         onPressed: () async {
                           favProvider.toggleFavorite(
                               userActive, widget.animalData.animalId);
                         },
-                        icon: Icon(
-                          Icons.favorite,
-                          color: favProvider.favoriteItem
-                                  .containsKey(widget.animalData.animalId)
-                              ? Colors.red
-                              : Colors.grey,
-                        ))
+                        icon: favProvider.favoriteItem
+                                .containsKey(widget.animalData.animalId)
+                            ? Image.asset('assets/icon/favorite.png')
+                            : const Icon(
+                                Icons.favorite,
+                                color: Colors.grey,
+                              ))
                   ],
                 ),
               ),

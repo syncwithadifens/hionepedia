@@ -1,5 +1,6 @@
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:hionepedia/theme/styles.dart';
 
 class CustomBottomNavbar extends StatelessWidget {
   const CustomBottomNavbar({
@@ -18,7 +19,7 @@ class CustomBottomNavbar extends StatelessWidget {
       notchBottomBarController: _controller,
       color: Colors.white,
       showLabel: true,
-      notchColor: Colors.teal,
+      notchColor: primaryColor,
       removeMargins: false,
       bottomBarWidth: 500,
       durationInMilliSeconds: 300,
