@@ -111,18 +111,13 @@ class _HomePageState extends State<HomePage> {
                                       animalProvider.animalData!.animal![index],
                                 ),
                               )),
-                          child: Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color:
-                                      randomColor[index % randomColor.length]),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.network(
-                                  '${ApiRepository.apiUrl}/img/${animalProvider.animalData!.animal![index].thumbnail}',
-                                  fit: BoxFit.cover,
-                                ),
-                              )),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.network(
+                              '${ApiRepository.apiUrl}/img/${animalProvider.animalData!.animal![index].thumbnail}',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         );
                       },
                     ),
