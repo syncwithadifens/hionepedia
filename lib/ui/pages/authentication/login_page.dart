@@ -30,15 +30,13 @@ class LoginPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-                margin: const EdgeInsets.only(
-                    left: 12, right: 12, top: 12, bottom: 20),
-                padding: const EdgeInsets.all(0),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: const Color(0xffF6C3BF)),
-                child:
-                    Center(child: Image.asset('assets/illustration/vr.png'))),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10, left: 5, right: 5),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child:
+                      Center(child: Image.asset('assets/illustration/vr.png'))),
+            ),
             const Center(
               child: Text(
                 'Login',
