@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hionepedia/providers/animal_provider.dart';
 import 'package:hionepedia/providers/favorite_provider.dart';
 import 'package:hionepedia/providers/user_provider.dart';
+import 'package:hionepedia/theme/styles.dart';
 import 'package:hionepedia/ui/pages/content/mypage.dart';
 import 'package:hionepedia/ui/pages/onboarding/onboarding_page.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -32,6 +33,8 @@ class MainApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
+        title: 'Hionepedia Apps',
+        theme: ThemeData(primaryColor: primaryColor),
         debugShowCheckedModeBanner: false,
         home: myBox.keys.contains('userActive')
             ? const MyPage()
