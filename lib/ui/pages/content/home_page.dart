@@ -44,7 +44,8 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Text(
                           'Hai, ${userActive[1].toString().toTitleCase()}',
-                          style: titleStyle,
+                          style:
+                              titleStyle.copyWith(fontWeight: FontWeight.w700),
                         ),
                         Image.asset(
                           'assets/avatar/default_avatar.png',
