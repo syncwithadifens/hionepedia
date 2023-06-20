@@ -53,7 +53,6 @@ class LoginPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: TextField(
-                autofocus: true,
                 controller: userProvider.usernameCtrl,
                 keyboardType: TextInputType.name,
                 textInputAction: TextInputAction.next,
