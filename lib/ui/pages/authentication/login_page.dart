@@ -31,11 +31,9 @@ class LoginPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 10, left: 5, right: 5),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child:
-                      Center(child: Image.asset('assets/illustration/vr.png'))),
+              padding:
+                  const EdgeInsets.only(bottom: 10, left: 5, right: 5, top: 5),
+              child: Center(child: Image.asset('assets/illustration/vr.png')),
             ),
             Center(
               child: Text(
