@@ -75,13 +75,12 @@ class _DetailPageState extends State<DetailPage> {
                       ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
+                padding: const EdgeInsets.only(top: 20),
                 child: Row(
                   children: [
                     Text(
                       '${widget.animalData.name}',
-                      style: const TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.w500),
+                      style: titleStyle.copyWith(fontWeight: FontWeight.w700),
                     ),
                     const Spacer(),
                     IconButton(
@@ -106,15 +105,16 @@ class _DetailPageState extends State<DetailPage> {
                   ],
                 ),
               ),
-              const Text(
+              Text(
                 'Deskripsi',
-                style: TextStyle(fontSize: 18),
+                style: subtitleStyle,
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
                   '${widget.animalData.description}',
                   textAlign: TextAlign.justify,
+                  style: textStyle.copyWith(fontSize: 14),
                 ),
               ),
             ]),

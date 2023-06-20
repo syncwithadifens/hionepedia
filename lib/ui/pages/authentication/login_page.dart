@@ -37,17 +37,17 @@ class LoginPage extends StatelessWidget {
                   child:
                       Center(child: Image.asset('assets/illustration/vr.png'))),
             ),
-            const Center(
+            Center(
               child: Text(
                 'Login',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+                style: titleStyle.copyWith(fontWeight: FontWeight.w700),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(32, 10, 32, 10),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(32, 10, 32, 10),
               child: Text(
                 'Username',
-                style: TextStyle(fontSize: 18),
+                style: subtitleStyle,
               ),
             ),
             Padding(
@@ -69,11 +69,11 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(32, 30, 32, 10),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(32, 30, 32, 10),
               child: Text(
                 'Pin',
-                style: TextStyle(fontSize: 18),
+                style: subtitleStyle,
               ),
             ),
             Padding(
@@ -139,13 +139,11 @@ class LoginPage extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: Colors.deepPurple,
                             borderRadius: BorderRadius.circular(18)),
-                        child: const Center(
+                        child: Center(
                             child: Text(
                           'Go',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
+                          style: titleStyle.copyWith(
+                              color: lightGrey, fontWeight: FontWeight.w600),
                         )),
                       )),
             Padding(
@@ -153,17 +151,18 @@ class LoginPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     'Belum punya akun? ',
-                    style: TextStyle(fontSize: 14),
+                    style: textStyle.copyWith(fontSize: 14),
                   ),
                   GestureDetector(
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => const RegisterPage(),
                     )),
-                    child: const Text(
+                    child: Text(
                       'buat sekarang juga',
-                      style: TextStyle(fontSize: 14, color: Colors.deepPurple),
+                      style: textStyle.copyWith(
+                          fontSize: 14, color: Colors.deepPurple),
                     ),
                   ),
                 ],

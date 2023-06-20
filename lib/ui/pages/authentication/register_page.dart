@@ -30,13 +30,13 @@ class RegisterPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 20),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, bottom: 10),
                   child: Center(
                     child: Text(
                       'Register',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+                      style: titleStyle.copyWith(
+                          fontSize: 20, fontWeight: FontWeight.w700),
                     ),
                   ),
                 ),
@@ -46,11 +46,11 @@ class RegisterPage extends StatelessWidget {
                     width: 200,
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(32, 10, 32, 10),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(32, 10, 32, 10),
                   child: Text(
                     'Username',
-                    style: TextStyle(fontSize: 18),
+                    style: subtitleStyle,
                   ),
                 ),
                 Padding(
@@ -73,11 +73,11 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(32, 30, 32, 10),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(32, 30, 32, 10),
                   child: Text(
                     'Pin',
-                    style: TextStyle(fontSize: 18),
+                    style: subtitleStyle,
                   ),
                 ),
                 Padding(
@@ -112,11 +112,11 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(32, 10, 32, 10),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(32, 10, 32, 10),
                   child: Text(
                     'Umur',
-                    style: TextStyle(fontSize: 18),
+                    style: subtitleStyle,
                   ),
                 ),
                 Padding(
@@ -138,11 +138,11 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(32, 30, 32, 10),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(32, 30, 32, 10),
                   child: Text(
                     'Hobi',
-                    style: TextStyle(fontSize: 18),
+                    style: subtitleStyle,
                   ),
                 ),
                 Padding(
@@ -191,13 +191,11 @@ class RegisterPage extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.deepPurple,
                         borderRadius: BorderRadius.circular(18)),
-                    child: const Center(
+                    child: Center(
                         child: Text(
                       'Let\'s Go',
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                      style: titleStyle.copyWith(
+                          color: lightGrey, fontWeight: FontWeight.w600),
                     )),
                   ),
                 ),

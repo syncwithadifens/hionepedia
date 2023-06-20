@@ -40,12 +40,11 @@ class _FavoritePageState extends State<FavoritePage> {
                 },
                 child: ListView(
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
                       child: Text(
                         'Favorite',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w500),
+                        style: titleStyle.copyWith(fontWeight: FontWeight.w600),
                       ),
                     ),
                     GridView.builder(

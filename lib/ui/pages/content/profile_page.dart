@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hionepedia/extensions/custom_extension.dart';
 import 'package:hionepedia/providers/user_provider.dart';
+import 'package:hionepedia/theme/styles.dart';
 import 'package:hionepedia/ui/pages/authentication/login_page.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
@@ -25,18 +26,18 @@ class ProfilePage extends StatelessWidget {
         ),
         Text(
           userActive[1].toString().toTitleCase(),
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+          style: titleStyle.copyWith(fontWeight: FontWeight.w700),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: Text(
             "${userActive[2]} Tahun",
-            style: const TextStyle(fontSize: 18),
+            style: subtitleStyle,
           ),
         ),
         Text(
           userActive[3].toString().toTitleCase(),
-          style: const TextStyle(fontSize: 18),
+          style: textStyle,
         ),
         Padding(
           padding: const EdgeInsets.only(top: 50),
