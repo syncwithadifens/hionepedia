@@ -30,19 +30,27 @@ class LoginPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding:
-                  const EdgeInsets.only(bottom: 10, left: 5, right: 5, top: 5),
-              child: Center(child: Image.asset('assets/illustration/vr.png')),
+            Container(
+              height: MediaQuery.sizeOf(context).height * 0.4,
+              width: MediaQuery.of(context).size.width,
+              margin: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: BorderRadius.circular(12),
+                  image: const DecorationImage(
+                      image: AssetImage('assets/illustration/vr.png'))),
             ),
             Center(
-              child: Text(
-                'Login',
-                style: titleStyle.copyWith(fontWeight: FontWeight.w700),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: Text(
+                  'Login',
+                  style: titleStyle.copyWith(fontWeight: FontWeight.w700),
+                ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(32, 10, 32, 10),
+              padding: const EdgeInsets.fromLTRB(32, 5, 32, 10),
               child: Text(
                 'Username',
                 style: subtitleStyle,
@@ -68,7 +76,7 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(32, 30, 32, 10),
+              padding: const EdgeInsets.fromLTRB(32, 20, 32, 10),
               child: Text(
                 'Pin',
                 style: subtitleStyle,
@@ -133,7 +141,7 @@ class LoginPage extends StatelessWidget {
                     : Container(
                         height: 60,
                         width: double.infinity,
-                        margin: const EdgeInsets.fromLTRB(32, 40, 32, 10),
+                        margin: const EdgeInsets.fromLTRB(32, 10, 32, 10),
                         decoration: BoxDecoration(
                             color: Colors.deepPurple,
                             borderRadius: BorderRadius.circular(18)),

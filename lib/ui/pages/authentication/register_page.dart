@@ -43,7 +43,7 @@ class RegisterPage extends StatelessWidget {
                 Center(
                   child: Image.asset(
                     'assets/avatar/default_avatar.png',
-                    width: 200,
+                    width: 100,
                   ),
                 ),
                 Padding(
