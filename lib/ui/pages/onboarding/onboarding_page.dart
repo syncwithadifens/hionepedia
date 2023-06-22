@@ -75,7 +75,7 @@ class IntroPageOne extends StatelessWidget {
             ),
           ),
           Text(
-            'Aplikasi pembelajaran yang akan mengubah cara Anda belajar. Kenali beragam hewan langkai di ujung jari Anda.',
+            'Aplikasi pembelajaran yang akan mengubah cara kamu belajar. Kenali beragam hewan langka di ujung jari jarimu.',
             style: textStyle.copyWith(fontSize: 14),
             textAlign: TextAlign.justify,
           )
