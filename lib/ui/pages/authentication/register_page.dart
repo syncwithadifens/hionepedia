@@ -189,7 +189,7 @@ class RegisterPage extends StatelessWidget {
                     width: double.infinity,
                     margin: const EdgeInsets.fromLTRB(32, 40, 32, 10),
                     decoration: BoxDecoration(
-                        color: Colors.deepPurple,
+                        color: blackColor,
                         borderRadius: BorderRadius.circular(18)),
                     child: Center(
                         child: Text(
