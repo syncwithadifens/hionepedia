@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hionepedia/extensions/custom_extension.dart';
 import 'package:hionepedia/providers/user_provider.dart';
 import 'package:hionepedia/theme/styles.dart';
-import 'package:hionepedia/ui/pages/authentication/login_page.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
@@ -39,20 +38,25 @@ class ProfilePage extends StatelessWidget {
           userActive[3].toString().toTitleCase(),
           style: textStyle,
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 50),
-          child: ElevatedButton.icon(
-            onPressed: () {
-              userProvider.logout().then((value) => {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
-                        ))
-                  });
-            },
-            icon: const Icon(Icons.logout),
-            label: const Text('Keluar'),
+        GestureDetector(
+          onTap: () {
+            userProvider.logout().then((value) => {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginPage(),
+                      ))
+                });
+          },
+          child: Container(
+            margin: const EdgeInsets.only(top: 50),
+            padding: const EdgeInsets.all(15),
+            decoration: BoxDecoration(
+                color: blackColor, borderRadius: BorderRadius.circular(12)),
+            child: Text(
+              'Keluar',
+              style: subtitleStyle.copyWith(color: lightGrey),
+            ),
           ),
         )
       ],
