@@ -72,12 +72,7 @@ abstract class ApiRepository {
   static register(String username, String pin, String age, String hobby) async {
     try {
       final response = await http.post(Uri.parse('$apiUrl/api/register'),
-          body: {
-            'username': username,
-            'pin': pin,
-            'age': int.parse(age),
-            'hobby': hobby
-          });
+          body: {'username': username, 'pin': pin, 'age': age, 'hobby': hobby});
       if (response.statusCode == 201) {
         return 'Account created successfully';
       }

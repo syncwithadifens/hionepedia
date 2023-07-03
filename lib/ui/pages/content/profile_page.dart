@@ -50,13 +50,25 @@ class ProfilePage extends StatelessWidget {
                 });
           },
           child: Container(
-            margin: const EdgeInsets.only(top: 50),
+            margin: const EdgeInsets.only(top: 50, left: 80, right: 80),
             padding: const EdgeInsets.all(15),
             decoration: BoxDecoration(
-                color: blackColor, borderRadius: BorderRadius.circular(12)),
-            child: Text(
-              'Keluar',
-              style: subtitleStyle.copyWith(color: lightGrey),
+                color: redColor, borderRadius: BorderRadius.circular(12)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.logout_rounded,
+                  color: lightGrey,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    'Keluar',
+                    style: subtitleStyle.copyWith(color: lightGrey),
+                  ),
+                ),
+              ],
             ),
           ),
         )
