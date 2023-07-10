@@ -31,7 +31,7 @@ class LoginPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: MediaQuery.sizeOf(context).height * 0.4,
+              height: MediaQuery.of(context).size.height * 0.4,
               width: MediaQuery.of(context).size.width,
               margin: const EdgeInsets.all(5),
               decoration: BoxDecoration(
