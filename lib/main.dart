@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hionepedia/providers/animal_provider.dart';
 import 'package:hionepedia/providers/favorite_provider.dart';
 import 'package:hionepedia/providers/user_provider.dart';
@@ -9,9 +10,17 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await Hive.initFlutter();
   await Hive.openBox('userBox');
   runApp(const MainApp());
+  await Future.delayed(
+    const Duration(seconds: 2),
+    () {
+      FlutterNativeSplash.remove();
+    },
+  );
 }
 
 class MainApp extends StatelessWidget {
