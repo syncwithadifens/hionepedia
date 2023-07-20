@@ -59,17 +59,11 @@ class _HomePageState extends State<HomePage> {
                     margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: Stack(
                       children: [
-                        Positioned(
+                        const Positioned(
                           top: 0,
                           left: 0,
                           right: 0,
-                          child: Container(
-                            height: 150,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(18),
-                                gradient: LinearGradient(
-                                    colors: [primaryColor, lightGrey])),
-                          ),
+                          child: MyContainer(),
                         ),
                         Positioned(
                           top: 40,
@@ -103,14 +97,8 @@ class _HomePageState extends State<HomePage> {
                       crossAxisSpacing: 20,
                       itemBuilder: (context, index) {
                         return GestureDetector(
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailPage(
-                                  animalData:
-                                      animalProvider.animalData!.animal![index],
-                                ),
-                              )),
+                          onTap: () => openDialog(context,
+                              animalProvider.animalData!.animal![index]),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
                             child: Image.network(
@@ -126,4 +114,55 @@ class _HomePageState extends State<HomePage> {
               )
             : const IsError();
   }
+}
+
+class MyContainer extends StatelessWidget {
+  const MyContainer({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 150,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18),
+          gradient: LinearGradient(colors: [primaryColor, lightGrey])),
+    );
+  }
+}
+
+void openDialog(BuildContext context, dynamic animalData) {
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: const Text('Perhatian!!'),
+      content: const Text(
+        "Di Halaman Augmented Reality harap untuk selalu ingat hal ini:\n\n1.Diperlukan pengawasan orang tua agar lebih aman.\n\n2.Waspada terhadap bahaya fisik di dunia nyata (misalnya, sadarilah lingkungan sekitar).",
+        textAlign: TextAlign.justify,
+      ),
+      actions: [
+        IconButton(
+          icon: Icon(
+            Icons.close,
+            color: redColor,
+          ),
+          onPressed: () => Navigator.pop(context),
+        ),
+        IconButton(
+          icon: const Icon(
+            Icons.check,
+            color: Colors.green,
+          ),
+          onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailPage(
+                  animalData: animalData,
+                ),
+              )),
+        ),
+      ],
+    ),
+  );
 }
