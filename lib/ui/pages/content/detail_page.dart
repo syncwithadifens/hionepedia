@@ -32,6 +32,7 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     final favProvider = Provider.of<FavoriteProvider>(context);
     final audioPlayer = AudioPlayer();
+    String description = widget.animalData.description;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -112,7 +113,7 @@ class _DetailPageState extends State<DetailPage> {
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
-                  '${widget.animalData.description}',
+                  description.replaceAll(r'\n', '\n'),
                   textAlign: TextAlign.justify,
                   style: textStyle.copyWith(fontSize: 14),
                 ),

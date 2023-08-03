@@ -150,18 +150,20 @@ void openDialog(BuildContext context, dynamic animalData) {
           onPressed: () => Navigator.pop(context),
         ),
         IconButton(
-          icon: const Icon(
-            Icons.check,
-            color: Colors.green,
-          ),
-          onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DetailPage(
-                  animalData: animalData,
-                ),
-              )),
-        ),
+            icon: const Icon(
+              Icons.check,
+              color: Colors.green,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailPage(
+                      animalData: animalData,
+                    ),
+                  ));
+            }),
       ],
     ),
   );
