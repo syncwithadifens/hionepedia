@@ -68,11 +68,14 @@ class _HomePageState extends State<HomePage> {
                         Positioned(
                           top: 40,
                           left: 20,
-                          right: 30,
-                          child: Text(
-                            'Yuk mulai mengenal hewan langka',
-                            style: titleStyle.copyWith(
-                                color: lightGrey, fontWeight: FontWeight.w600),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.6,
+                            child: Text(
+                              'Yuk mulai mengenal hewan langka',
+                              style: titleStyle.copyWith(
+                                  color: lightGrey,
+                                  fontWeight: FontWeight.w600),
+                            ),
                           ),
                         ),
                         Positioned(
