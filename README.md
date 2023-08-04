@@ -11,7 +11,7 @@ Hionepedia merupakan aplikasi pembelajaran hewan langka menggunakan teknologi AR
 - Memiliki Fitur Augmented Reality
 - Memiliki Fitur Suara Hewan
 
-### Preview
+<!-- ### Preview -->
 
 <!-- |                                                       |                                                 |
 | ----------------------------------------------------- | ----------------------------------------------- |
